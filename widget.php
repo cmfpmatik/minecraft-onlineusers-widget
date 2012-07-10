@@ -2,14 +2,14 @@
 
 /**
  * @package Minecraft OnlineUsers Widget
- * @version 1.0
+ * @version 1.1
  */
 /*
 Plugin Name: Minecraft OnlineUsers Widget
 Plugin URI: 
 Description: Plugin Widget permettant d'afficher les joueurs en ligne d'un serveur dans le menu du blog.
 Author: pirmax
-Version: 1.0
+Version: 1.1
 Author URI: http://www.devence.com/
 */
 
