@@ -43,6 +43,7 @@ class widget_mou extends WP_widget
 			"serverport" => "25565",
 			"displayAvatar" => 1,
 			"displayCount" => 1,
+			"nbSlot" => 30,
 			"format_data" => ""
 		);
 		$instance = wp_parse_args($instance, $defaut);
@@ -62,7 +63,7 @@ class widget_mou extends WP_widget
 			}
 			catch( MinecraftQueryException $e )
 			{
-				echo $e->getMessage();
+				// echo $e->getMessage();
 			}
 
 			$displayWidget = '';
@@ -98,7 +99,7 @@ class widget_mou extends WP_widget
 
 			if($instance['displayCount'] !== 1)
 			{
-				echo $before_title . $instance['title'] . '<strong style="margin-left: 20px;">' . $resnbPlayer . '/30</strong>' . $after_title;
+				echo $before_title . $instance['title'] . '<strong style="margin-left: 20px;">' . $resnbPlayer . '/' . $instance['nbSlot'] . '</strong>' . $after_title;
 			}
 			else
 			{
@@ -126,6 +127,7 @@ class widget_mou extends WP_widget
 			"serverport" => "25565",
 			"displayAvatar" => 1,
 			"displayCount" => 1,
+			"nbSlot" => 30,
 			"format_data" => ""
 		);
 		$d = wp_parse_args($d, $defaut);
@@ -143,6 +145,10 @@ class widget_mou extends WP_widget
 		<input value="<?php echo $d['serverip']; ?>" name="<?php echo $this->get_field_name('serverip'); ?>" id="<?php echo $this->get_field_id('serverip'); ?>" type="text" size="100%" /><br />
 		<label for="<?php echo $this->get_field_id('serverport'); ?>">Port du serveur :</label><br />
 		<input value="<?php echo $d['serverport']; ?>" name="<?php echo $this->get_field_name('serverport'); ?>" id="<?php echo $this->get_field_id('serverport'); ?>" type="text" size="100%" />
+		</p>
+		<p>
+		<label for="<?php echo $this->get_field_id('nbSlot'); ?>">Nombre de slot du serveur :</label><br />
+		<input value="<?php echo $d['nbSlot']; ?>" name="<?php echo $this->get_field_name('nbSlot'); ?>" id="<?php echo $this->get_field_id('nbSlot'); ?>" type="text" size="100%" />
 		</p>
 		<p>
 		<label for="<?php echo $this->get_field_id('displayAvatar'); ?>"><input name="<?php echo $this->get_field_name('displayAvatar'); ?>" id="<?php echo $this->get_field_id('displayAvatar'); ?>" type="checkbox" <?php if($d['displayAvatar'] !== 1){ echo 'checked'; } ?> /> Afficher les avatars</label><br />
