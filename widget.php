@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @package Minecraft OnlineUsers Widget
- * @version 1.1
+ * @package Minecraft Online Users Widget
+ * @version 2.0
  */
 /*
-Plugin Name: Minecraft OnlineUsers Widget
+Plugin Name: Minecraft Online Users Widget
 Plugin URI: 
 Description: Plugin Widget permettant d'afficher les joueurs en ligne d'un serveur dans le menu du blog.
 Author: pirmax
-Version: 1.1
-Author URI: http://www.devence.com/
+Version: 2.0
+Author URI: http://pirmax.fr/
 */
 
 require_once(dirname(__FILE__) . '/MinecraftQuery.class.php');
@@ -100,7 +100,49 @@ class widget_mou extends WP_widget
 				{
 					if($instance['displayAvatar'] !== 1)
 					{
-						$displayWidget .= '<li id="mouw_li"><img src="https://minotar.net/helm/' . $value . '/' . $instance['avatarSize'] . '.png" width="' . $instance['avatarSize'] . '" height="' . $instance['avatarSize'] . '" border="0" title="' . $value . '" alt="avatar_' . $value . '" id="mouw_avatar" />' . $value . '</li>';					}					else					{						$displayWidget .= '<li id="mouw_li">' . $value . '</li>';					}				}				$resnbPlayer = count($GetPlayers);			}			else			{				$displayWidget .= '<li id="mouw_li">' . $instance['ifNoPlayer'] . '</li>';				$resnbPlayer = 0;			}			$displayWidget .= '</ul>';			echo $before_widget;			if($instance['displayCount'] !== 1)			{				echo $before_title . '<span id="mouw_title">' . $instance['title'] . '</span><span id="mouw_number">' . $resnbPlayer . '/' . $instance['nbSlot'] . '</span>' . $after_title;			}			else			{				echo $before_title . $instance['title'] . $after_title;			}			echo $displayWidget;			echo $after_widget;		}	}	function update($new, $old)	{		return $new;	}	function form($d)	{
+						$displayWidget .= '<li id="mouw_li"><img src="https://minotar.net/helm/' . $value . '/' . $instance['avatarSize'] . '.png" width="' . $instance['avatarSize'] . '" height="' . $instance['avatarSize'] . '" border="0" title="' . $value . '" alt="avatar_' . $value . '" id="mouw_avatar" />' . $value . '</li>';
+					}
+					else
+					{
+						$displayWidget .= '<li id="mouw_li">' . $value . '</li>';
+					}
+				}
+				$resnbPlayer = count($GetPlayers);
+			}
+			else
+			{
+				$displayWidget .= '<li id="mouw_li">' . $instance['ifNoPlayer'] . '</li>';
+				$resnbPlayer = 0;
+			}
+
+			$displayWidget .= '</ul>';
+
+			echo $before_widget;
+
+			if($instance['displayCount'] !== 1)
+			{
+				echo $before_title . '<span id="mouw_title">' . $instance['title'] . '</span><span id="mouw_number">' . $resnbPlayer . '/' . $instance['nbSlot'] . '</span>' . $after_title;
+			}
+			else
+			{
+				echo $before_title . $instance['title'] . $after_title;
+			}
+
+			echo $displayWidget;
+			echo $after_widget;
+
+		}
+
+	}
+
+	function update($new, $old)
+	{
+		return $new;
+	}
+
+	function form($d)
+	{
+
 		$defaut = array(
 			"title" => "Les joueurs en ligne",
 			"ifNoPlayer" => "Aucun joueur en ligne",
@@ -162,7 +204,10 @@ class widget_mou extends WP_widget
 		<p>
 		<label for="<?php echo $this->get_field_id('displayAvatar'); ?>"><input name="<?php echo $this->get_field_name('displayAvatar'); ?>" id="<?php echo $this->get_field_id('displayAvatar'); ?>" type="checkbox" <?php if($d['displayAvatar'] !== 1){ echo 'checked'; } ?> /> Afficher l'avatar des joueurs</label><br />
 		<label for="<?php echo $this->get_field_id('displayCount'); ?>"><input name="<?php echo $this->get_field_name('displayCount'); ?>" id="<?php echo $this->get_field_id('displayCount'); ?>" type="checkbox" <?php if($d['displayCount'] !== 1){ echo 'checked'; } ?> /> Afficher le nombre de joueur en ligne</label>
-		</p>		<p style="border-bottom: 1px dashed #CCCCCC; padding-bottom: 5px;">		Soutenez le créateur de cette extension en vous abonnant à sa chaîne : <a href="http://www.youtube.com/user/PirmaxLePoulpeRouge" target="_blank">PirmaxLePoulpeRouge</a>.		</p>
+		</p>
+		<p style="border-bottom: 1px dashed #CCCCCC; padding-bottom: 5px;">
+		Soutenez le créateur de cette extension en vous abonnant à sa chaîne : <a href="http://www.youtube.com/user/PirmaxLePoulpeRouge" target="_blank">PirmaxLePoulpeRouge</a>.
+		</p>
 		<?php
 
 	}

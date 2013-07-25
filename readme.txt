@@ -1,4 +1,4 @@
-=== Minecraft OnlineUsers Widget ===
+=== Minecraft Online Users Widget ===
 Contributors: pirmax
 Donate link: http://pirmax.fr/
 Tags: minecraft, online, users, widget, user, player, display, affichage, extension, plugin, afficher
@@ -22,7 +22,7 @@ Rendez-vous dans le pannel des widgets sur votre blog Wordpress, et ajoutez le w
 
 == Screenshots ==
 
-1. screenshot-1.png 
+1. Exemple d'affichage de deux joueurs en ligne
 
 == Changelog ==
 
