@@ -2,14 +2,14 @@
 
 /**
  * @package Minecraft Online Users Widget
- * @version 2.0
+ * @version 2.1
  */
 /*
 Plugin Name: Minecraft Online Users Widget
 Plugin URI: 
 Description: Plugin Widget permettant d'afficher les joueurs en ligne d'un serveur dans le menu du blog.
 Author: pirmax
-Version: 2.0
+Version: 2.1
 Author URI: http://pirmax.fr/
 */
 
@@ -31,7 +31,7 @@ class widget_mou extends WP_widget
 			"description" => "Afficher les joueurs en ligne sur votre serveur Minecraft."
 		);
 
-		$this->WP_widget("widget-mou", "Minecraft OnlineUsers", $options);
+		$this->WP_widget("widget-mou", "Minecraft Online Users", $options);
 	}
 
 	function widget($args, $instance)
@@ -40,7 +40,7 @@ class widget_mou extends WP_widget
 		$defaut = array(
 			"title" => "Les joueurs en ligne",
 			"ifNoPlayer" => "Aucun joueur en ligne",
-			"serverip" => "",
+			"serverip" => "play.minefight.fr",
 			"serverport" => "25565",
 			"displayAvatar" => 1,
 			"displayCount" => 1,
@@ -70,10 +70,7 @@ class widget_mou extends WP_widget
 
 		$GetPlayers = array();
 
-		if(empty($instance['serverip']) OR empty($instance['serverport']))
-		{
-		}
-		else
+		if(!empty($instance['serverip']) AND !empty($instance['serverport']))
 		{
 
 			$Query = new MinecraftQuery( );
@@ -81,7 +78,7 @@ class widget_mou extends WP_widget
 			try
 			{
 				$Query->Connect( $instance['serverip'], $instance['serverport'], 1 );
-				$GetPlayers = $Query->GetPlayers();
+				$GetPlayers = (array) $Query->GetPlayers();
 			}
 			catch( MinecraftQueryException $e )
 			{
@@ -146,7 +143,7 @@ class widget_mou extends WP_widget
 		$defaut = array(
 			"title" => "Les joueurs en ligne",
 			"ifNoPlayer" => "Aucun joueur en ligne",
-			"serverip" => "",
+			"serverip" => "play.minefight.fr",
 			"serverport" => "25565",
 			"displayAvatar" => 1,
 			"displayCount" => 1,
@@ -181,29 +178,33 @@ class widget_mou extends WP_widget
 		</p>
 		<p>
 		<label for="<?php echo $this->get_field_id('title'); ?>">Titre du widget :</label><br />
-		<input value="<?php echo $d['title']; ?>" name="<?php echo $this->get_field_name('title'); ?>" id="<?php echo $this->get_field_id('title'); ?>" type="text" size="35" style="margin-left: 1em;" />
+		<input value="<?php echo $d['title']; ?>" name="<?php echo $this->get_field_name('title'); ?>" id="<?php echo $this->get_field_id('title'); ?>" type="text" size="35" style="margin-left: 1em;" placeholder="Les joueurs en ligne" />
+		</p>
+		<p>
+		<label for="<?php echo $this->get_field_id('ifNoPlayer'); ?>">Texte de remplacement :</label><br />
+		<input value="<?php echo $d['ifNoPlayer']; ?>" name="<?php echo $this->get_field_name('ifNoPlayer'); ?>" id="<?php echo $this->get_field_id('ifNoPlayer'); ?>" type="text" size="45" style="margin-left: 1em;" placeholder="Aucun joueur en ligne" />
 		</p>
 		<p>
 		<label for="<?php echo $this->get_field_id('serverip'); ?>">Adresse IP du serveur :</label><br />
-		<input value="<?php echo $d['serverip']; ?>" name="<?php echo $this->get_field_name('serverip'); ?>" id="<?php echo $this->get_field_id('serverip'); ?>" type="text" size="35" style="margin-left: 1em;" /><br />
+		<input value="<?php echo $d['serverip']; ?>" name="<?php echo $this->get_field_name('serverip'); ?>" id="<?php echo $this->get_field_id('serverip'); ?>" type="text" size="35" style="margin-left: 1em;" placeholder="play.minefight.fr" /><br />
 		<label for="<?php echo $this->get_field_id('serverport'); ?>">Port du serveur :</label><br />
-		<input value="<?php echo $d['serverport']; ?>" name="<?php echo $this->get_field_name('serverport'); ?>" id="<?php echo $this->get_field_id('serverport'); ?>" type="text" size="20" style="margin-left: 1em;" />
+		<input value="<?php echo $d['serverport']; ?>" name="<?php echo $this->get_field_name('serverport'); ?>" id="<?php echo $this->get_field_id('serverport'); ?>" type="text" size="20" style="margin-left: 1em;" placeholder="25565" />
 		</p>
 		<p>
 		<label for="<?php echo $this->get_field_id('nbSlot'); ?>">Nombre de slot du serveur :</label><br />
-		<input value="<?php echo $d['nbSlot']; ?>" name="<?php echo $this->get_field_name('nbSlot'); ?>" id="<?php echo $this->get_field_id('nbSlot'); ?>" type="text" size="10" style="margin-left: 1em;" /> slot(s)  <abbr title="Nombre de slot disponible sur votre serveur">(?)</abbr>
+		<input value="<?php echo $d['nbSlot']; ?>" name="<?php echo $this->get_field_name('nbSlot'); ?>" id="<?php echo $this->get_field_id('nbSlot'); ?>" type="text" size="10" style="margin-left: 1em;" placeholder="30" /> slot(s)  <abbr title="Nombre de slot disponible sur votre serveur">(?)</abbr>
 		</p>
 		<p>
 		<label for="<?php echo $this->get_field_id('avatarSize'); ?>">Taille des avatars :</label><br />
-		<input value="<?php echo $d['avatarSize']; ?>" name="<?php echo $this->get_field_name('avatarSize'); ?>" id="<?php echo $this->get_field_id('avatarSize'); ?>" type="text" size="10" style="margin-left: 1em;" /> pixel(s)  <abbr title="Nombre de pixel (Longueur x Hauteur) de l'image">(?)</abbr>
+		<input value="<?php echo $d['avatarSize']; ?>" name="<?php echo $this->get_field_name('avatarSize'); ?>" id="<?php echo $this->get_field_id('avatarSize'); ?>" type="text" size="10" style="margin-left: 1em;" placeholder="25" /> pixel(s)  <abbr title="Nombre de pixel (Longueur x Hauteur) de l'image">(?)</abbr>
 		</p>
 		<p id="editCSS">
 		<label for="<?php echo $this->get_field_id('styleCSS'); ?>">Modifier le style CSS :</label><br />
 		<textarea name="<?php echo $this->get_field_name('styleCSS'); ?>" id="<?php echo $this->get_field_id('styleCSS'); ?>" cols="36" rows="10"><?php echo $d['styleCSS']; ?></textarea>
 		</p>
 		<p>
-		<label for="<?php echo $this->get_field_id('displayAvatar'); ?>"><input name="<?php echo $this->get_field_name('displayAvatar'); ?>" id="<?php echo $this->get_field_id('displayAvatar'); ?>" type="checkbox" <?php if($d['displayAvatar'] !== 1){ echo 'checked'; } ?> /> Afficher l'avatar des joueurs</label><br />
-		<label for="<?php echo $this->get_field_id('displayCount'); ?>"><input name="<?php echo $this->get_field_name('displayCount'); ?>" id="<?php echo $this->get_field_id('displayCount'); ?>" type="checkbox" <?php if($d['displayCount'] !== 1){ echo 'checked'; } ?> /> Afficher le nombre de joueur en ligne</label>
+		<label for="<?php echo $this->get_field_id('displayAvatar'); ?>"><input name="<?php echo $this->get_field_name('displayAvatar'); ?>" id="<?php echo $this->get_field_id('displayAvatar'); ?>" type="checkbox" <?php if($d['displayAvatar'] == 1){ echo 'checked'; } ?> /> Afficher l'avatar des joueurs</label><br />
+		<label for="<?php echo $this->get_field_id('displayCount'); ?>"><input name="<?php echo $this->get_field_name('displayCount'); ?>" id="<?php echo $this->get_field_id('displayCount'); ?>" type="checkbox" <?php if($d['displayCount'] == 1){ echo 'checked'; } ?> /> Afficher le nombre de joueur en ligne</label>
 		</p>
 		<p style="border-bottom: 1px dashed #CCCCCC; padding-bottom: 5px;">
 		Soutenez le créateur de cette extension en vous abonnant à sa chaîne : <a href="http://www.youtube.com/user/PirmaxLePoulpeRouge" target="_blank">PirmaxLePoulpeRouge</a>.
