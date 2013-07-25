@@ -26,7 +26,7 @@ Rendez-vous dans le pannel des widgets sur votre blog Wordpress, et ajoutez le w
 
 == Changelog ==
 
-= 2.1 =
+= 2.2 =
 
 * Ajout d'une option pour modifier le CSS du Widget* Ajout d'une option pour modifier le texte écrit si aucun joueur est connecté* Possibilité de gérer la taille des avatars* Utilisation des avatars de Minotar.net* Résolution des erreurs PHP qui empêchaient le bon fonctionnement du plugin
 

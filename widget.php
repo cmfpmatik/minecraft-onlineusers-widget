@@ -2,14 +2,14 @@
 
 /**
  * @package Minecraft Online Users Widget
- * @version 2.1
+ * @version 2.2
  */
 /*
 Plugin Name: Minecraft Online Users Widget
 Plugin URI: 
 Description: Plugin Widget permettant d'afficher les joueurs en ligne d'un serveur dans le menu du blog.
 Author: pirmax
-Version: 2.1
+Version: 2.2
 Author URI: http://pirmax.fr/
 */
 
@@ -42,8 +42,8 @@ class widget_mou extends WP_widget
 			"ifNoPlayer" => "Aucun joueur en ligne",
 			"serverip" => "play.minefight.fr",
 			"serverport" => "25565",
-			"displayAvatar" => 1,
-			"displayCount" => 1,
+			"displayAvatar" => "on",
+			"displayCount" => "on",
 			"nbSlot" => 30,
 			"avatarSize" => 25,
 			"styleCSS" => "#mouw_li {
@@ -63,8 +63,7 @@ class widget_mou extends WP_widget
 #mouw_number {
 	margin-left: 20px;
 	font-weight: bold;
-}",
-			"format_data" => ""
+}"
 		);
 		$instance = wp_parse_args($instance, $defaut);
 
@@ -85,7 +84,7 @@ class widget_mou extends WP_widget
 				// echo $e->getMessage();
 			}
 
-			$displayWidget = '';
+			$displayWidget = '<style>' . $instance['styleCSS'] . '</style>';
 
 			extract($args);
 
@@ -145,8 +144,8 @@ class widget_mou extends WP_widget
 			"ifNoPlayer" => "Aucun joueur en ligne",
 			"serverip" => "play.minefight.fr",
 			"serverport" => "25565",
-			"displayAvatar" => 1,
-			"displayCount" => 1,
+			"displayAvatar" => "on",
+			"displayCount" => "on",
 			"nbSlot" => 30,
 			"avatarSize" => 25,
 			"styleCSS" => "#mouw_li {
@@ -166,8 +165,7 @@ class widget_mou extends WP_widget
 #mouw_number {
 	margin-left: 20px;
 	font-weight: bold;
-}",
-			"format_data" => ""
+}"
 		);
 		$d = wp_parse_args($d, $defaut);
 
@@ -203,8 +201,8 @@ class widget_mou extends WP_widget
 		<textarea name="<?php echo $this->get_field_name('styleCSS'); ?>" id="<?php echo $this->get_field_id('styleCSS'); ?>" cols="36" rows="10"><?php echo $d['styleCSS']; ?></textarea>
 		</p>
 		<p>
-		<label for="<?php echo $this->get_field_id('displayAvatar'); ?>"><input name="<?php echo $this->get_field_name('displayAvatar'); ?>" id="<?php echo $this->get_field_id('displayAvatar'); ?>" type="checkbox" <?php if($d['displayAvatar'] == 1){ echo 'checked'; } ?> /> Afficher l'avatar des joueurs</label><br />
-		<label for="<?php echo $this->get_field_id('displayCount'); ?>"><input name="<?php echo $this->get_field_name('displayCount'); ?>" id="<?php echo $this->get_field_id('displayCount'); ?>" type="checkbox" <?php if($d['displayCount'] == 1){ echo 'checked'; } ?> /> Afficher le nombre de joueur en ligne</label>
+		<label for="<?php echo $this->get_field_id('displayAvatar'); ?>"><input name="<?php echo $this->get_field_name('displayAvatar'); ?>" id="<?php echo $this->get_field_id('displayAvatar'); ?>" type="checkbox" <?php if($d['displayAvatar'] == 'on'){ echo 'checked'; } ?> /> Afficher l'avatar des joueurs</label><br />
+		<label for="<?php echo $this->get_field_id('displayCount'); ?>"><input name="<?php echo $this->get_field_name('displayCount'); ?>" id="<?php echo $this->get_field_id('displayCount'); ?>" type="checkbox" <?php if($d['displayCount'] == 'on'){ echo 'checked'; } ?> /> Afficher le nombre de joueur en ligne</label>
 		</p>
 		<p style="border-bottom: 1px dashed #CCCCCC; padding-bottom: 5px;">
 		Soutenez le créateur de cette extension en vous abonnant à sa chaîne : <a href="http://www.youtube.com/user/PirmaxLePoulpeRouge" target="_blank">PirmaxLePoulpeRouge</a>.
